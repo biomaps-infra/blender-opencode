@@ -10,6 +10,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest",
+    "fake-bpy-module-5.0",  # LSP support for Blender API
 ]
 
 [tool.uv]
