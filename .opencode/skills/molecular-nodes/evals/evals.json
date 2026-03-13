@@ -1,0 +1,128 @@
+{
+  "skill_name": "molecular-nodes",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a Python script using MolecularNodes to fetch PDB structure 4OZS and render it as a cartoon with Cycles at 32 samples",
+      "expected_output": "A complete Python script that imports molecularnodes, creates a Canvas with Cycles, fetches the structure with mn.Molecule.fetch, adds a StyleCartoon, frames the object, and calls snapshot",
+      "files": [],
+      "expectations": [
+        "Uses import molecularnodes as mn",
+        "Creates a Canvas with mn.scene.Cycles(samples=32) or equivalent",
+        "Calls mn.Molecule.fetch('4OZS') or mn.Molecule.fetch('4ozs')",
+        "Applies StyleCartoon or add_style('cartoon')",
+        "Calls canvas.frame_object() and canvas.snapshot()"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "How do I fetch an AlphaFold predicted structure and color it by pLDDT confidence in MolecularNodes?",
+      "expected_output": "Explanation and code showing how to use database='alphafold' with a UniProt accession code and color='pLDDT'",
+      "files": [],
+      "expectations": [
+        "Uses mn.Molecule.fetch with database='alphafold'",
+        "Mentions UniProt accession code as the identifier (not PDB code)",
+        "Uses color='pLDDT' in add_style",
+        "Explains that b_factor contains pLDDT confidence scores for AlphaFold structures"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write a script to combine cartoon and transparent surface styles on a protein structure, showing the surface only for peptide regions",
+      "expected_output": "A script demonstrating multiple styles with MoleculeSelector for peptide selection and transparent material",
+      "files": [],
+      "expectations": [
+        "Uses add_style for both cartoon and surface",
+        "Uses MoleculeSelector().is_peptide() or selection='is_peptide' for the surface",
+        "Uses mn.material.TransparentOutline() or similar transparent material",
+        "Demonstrates method chaining or sequential add_style calls"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "How do I load an MD trajectory with MDAnalysis and visualize it in Blender with MolecularNodes?",
+      "expected_output": "Complete workflow: create MDAnalysis Universe, create mn.Trajectory, add styles with MDAnalysis selection strings, render",
+      "files": [],
+      "expectations": [
+        "Imports MDAnalysis as mda",
+        "Creates mda.Universe with topology and trajectory files",
+        "Creates mn.Trajectory(universe)",
+        "Shows add_style with MDAnalysis selection string syntax",
+        "Mentions frame playback or canvas.snapshot with specific frame"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Create a custom color mapping for a trajectory based on RMSF analysis results using MolecularNodes",
+      "expected_output": "Script performing RMSF analysis with MDAnalysis, mapping values to colors with matplotlib colormap, storing as named attribute",
+      "files": [],
+      "expectations": [
+        "Uses MDAnalysis alignment and RMSF analysis functions",
+        "Applies matplotlib colormap (e.g., inferno, viridis) to create RGBA array",
+        "Calls traj.store_named_attribute(colors, 'custom_color')",
+        "Uses color='custom_color' in add_style"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "How do I import a CryoEM density map and visualize it as an isosurface in Blender?",
+      "expected_output": "Explanation and code showing density loading, iso_value adjustment, contour settings, and optional coloring from atomic structure",
+      "files": [],
+      "expectations": [
+        "Uses mn.entities.density.io.load() with file_path and style='density_iso_surface'",
+        "Shows how to adjust ds.iso_value on the density style",
+        "Mentions .map or .map.gz file format",
+        "Mentions the .vdb intermediate file that should not be moved"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Write a script to render an animation of an MD trajectory with distance annotations between two residues",
+      "expected_output": "Complete script with trajectory loading, styling, COM distance annotation, and animation rendering",
+      "files": [],
+      "expectations": [
+        "Creates mn.Trajectory from mda.Universe",
+        "Adds at least one style",
+        "Uses t.annotations.add_com_distance() with selection1 and selection2",
+        "Calls canvas.animation() with frame_start and frame_end"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Explain the MolecularNodes Geometry Nodes pipeline: how does molecular data flow from import to rendered output?",
+      "expected_output": "Clear explanation of atoms as vertices, bonds as edges, attributes on mesh, and the Select -> Color -> Style node flow",
+      "files": [],
+      "expectations": [
+        "Explains that atoms are stored as mesh vertices and bonds as edges",
+        "Mentions Named Attributes for molecular properties",
+        "Describes the pipeline: Group Input -> Select/Color -> Style -> Group Output",
+        "Mentions Join Geometry for combining multiple styles",
+        "Notes that string data is stored as integers with lookup tables"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "How do I set up a Canvas with specific rendering settings and compare EEVEE vs Cycles output?",
+      "expected_output": "Code showing Canvas creation with both engines, resolution settings, transparency, and rendering",
+      "files": [],
+      "expectations": [
+        "Shows mn.Canvas constructor with engine parameter",
+        "Demonstrates both mn.scene.Cycles(samples=N) and EEVEE engine options",
+        "Shows how to change cv.engine after creation",
+        "Mentions that StyleSpheres geometry='Point' is Cycles-only"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "How do I use MoleculeSelector to create complex selections combining chain, residue type, and backbone/sidechain in MolecularNodes?",
+      "expected_output": "Examples of MoleculeSelector with chained method calls for multi-criteria selections",
+      "files": [],
+      "expectations": [
+        "Uses mn.MoleculeSelector() with chained methods",
+        "Shows at least two different selection criteria combined (e.g., chain + residue)",
+        "Demonstrates both is_* and not_* methods",
+        "Shows passing the selector to add_style's selection parameter"
+      ]
+    }
+  ]
+}

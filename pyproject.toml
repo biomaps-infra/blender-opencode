@@ -1,0 +1,19 @@
+[project]
+name = "blender-opencode"
+version = "0.1.0"
+description = "Blender scripting and molecular visualization with headless bpy"
+requires-python = "==3.11.*"
+dependencies = [
+    "molecularnodes[bpy]",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.uv]
+# Pin numpy to 1.26 — required by bpy and molecularnodes
+constraint-dependencies = [
+    "numpy==1.26.*",
+]
