@@ -38,3 +38,6 @@ htmlcov/
 
 # Ruff
 .ruff_cache/
+
+# Workspace artifacts (ephemeral per-session output)
+workspace/tmp/
