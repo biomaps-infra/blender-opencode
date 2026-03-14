@@ -40,8 +40,27 @@ uv run python -c "import molecularnodes as mn; mol = mn.Molecule.fetch('4ozs')"
 │   └── skills/            # Reusable skill definitions (blender-api, molecular-nodes, skill-creator)
 ├── scripts/               # Standalone Blender Python scripts
 ├── addons/                # Blender addon packages
-└── tests/                 # Test files
+├── tests/                 # Test files
+└── workspace/
+    └── tmp/{session-id}/  # Ephemeral per-session artifacts (renders, exports, intermediate files)
 ```
+
+## Workspace Convention
+
+All output artifacts (rendered images, exported meshes, .blend files, intermediate data) go into `workspace/tmp/{session-id}/` where `{session-id}` is a unique identifier per task or session. This keeps the project root clean and makes artifacts easy to find and clean up.
+
+**Rules:**
+1. **Always create a session directory** before writing any output. Use a short descriptive ID (e.g., `workspace/tmp/protein-4ozs-render/`, `workspace/tmp/trajectory-analysis/`).
+2. **Never write artifacts to the project root**, `scripts/`, or any other directory.
+3. **Set render output paths** to the session directory:
+   ```python
+   import os
+   session_dir = "workspace/tmp/my-session"
+   os.makedirs(session_dir, exist_ok=True)
+   canvas.snapshot(path=os.path.join(session_dir, "render.png"))
+   ```
+4. **The workspace/tmp/ directory is gitignored.** Artifacts are ephemeral and not committed.
+5. **Scripts themselves** go in `scripts/`. Only their output goes in `workspace/tmp/`.
 
 ## Code Standards
 
