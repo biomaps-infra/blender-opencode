@@ -1,6 +1,6 @@
-# Blender OpenCode Project
+# Scientific Computing & 3D Visualization Platform
 
-Blender scripting and molecular visualization project. Uses headless `bpy` (Blender 5.0) and MolecularNodes via a uv-managed Python 3.11 environment.
+Comprehensive scientific research platform combining end-to-end workflows from database access to professional 3D molecular visualization. Serves academic institutions and pharmaceutical/biotech companies with integrated analysis, visualization, and publication capabilities using headless Blender 5.0 and MolecularNodes via a uv-managed Python 3.11 environment.
 
 ## Environment
 
@@ -28,13 +28,29 @@ uv run python -c "import molecularnodes as mn; mol = mn.Molecule.fetch('4ozs')"
 
 **Never install packages manually.** Add dependencies to `pyproject.toml` and run `uv lock && uv sync`.
 
+### Scientific Domain Installation
+
+```bash
+# Core scientific platform
+uv sync --extra databases --extra analysis
+
+# Bioinformatics workflow (single-cell, genomics, proteomics)
+uv sync --extra bioinformatics --extra visualization
+
+# Drug discovery pipeline (chemistry, ML, 3D visualization)
+uv sync --extra databases --extra machine-learning --extra visualization
+
+# Clinical research (trials, statistical analysis, reporting)
+uv sync --extra databases --extra workflows --extra documentation
+```
+
 ## Project Structure
 
 ```
 .
 ├── pyproject.toml         # Dependencies and project metadata
 ├── uv.lock                # Locked dependency versions
-├── opencode.json          # OpenCode configuration
+├── Claude.json          # Claude Code configuration
 ├── AGENTS.md              # This file — project rules
 ├── .opencode/
 │   └── skills/            # Reusable skill definitions (blender-api, molecular-nodes, skill-creator)
@@ -44,6 +60,60 @@ uv run python -c "import molecularnodes as mn; mol = mn.Molecule.fetch('4ozs')"
 └── workspace/
     └── tmp/{session-id}/  # Ephemeral per-session artifacts (renders, exports, intermediate files)
 ```
+
+## Scientific Capabilities
+
+This platform provides **177 scientific skills** across 13 domains, enabling complete research workflows:
+
+| Domain | Skills | Purpose |
+|--------|--------|---------|
+| **databases** (`db-*`) | 36 skills | Scientific data sources (PubMed, AlphaFold, ChEMBL, UniProt) |
+| **libraries** (`lib-*`) | 60+ skills | Python scientific stack (SciPy, PyTorch, RDKit, Scanpy) |
+| **bioinformatics** (`bio-*`) | 17 skills | Life sciences tools (single-cell, MD simulations, phylogenetics) |
+| **analysis** (`analysis-*`) | 10 skills | Statistical analysis and hypothesis generation |
+| **visualization** (`viz-*`) | 6 skills | Publication-ready scientific graphics |
+| **documentation** (`doc-*`) | 12 skills | Scientific writing and manuscript preparation |
+| **workflows** (`workflow-*`) | 8 skills | Clinical decision support and research management |
+| **services** (`service-*`) | 16 skills | Lab automation and cloud platforms (Opentrons, Benchling) |
+| **machine-learning** (`ml-*`) | 5 skills | Specialized ML for scientific applications |
+
+### Example Research Workflows
+
+**Protein Structure Analysis** (Academic/Pharma):
+```python
+# 1. Fetch AlphaFold structure → 2. 3D visualization → 3. Publication render
+mol = mn.Molecule.fetch("P04637")  # p53 protein
+canvas = mn.Canvas(); canvas.add(mol, style="cartoon")
+canvas.snapshot("p53_structure.png", samples=128)  # Cycles rendering
+```
+
+**Drug Discovery Pipeline** (Pharmaceutical):
+```python
+# 1. ChEMBL target search → 2. Chemical analysis → 3. Docking → 4. 3D results
+from db_chembl import query_target
+from lib_rdkit import filter_druglike
+from bio_diffdock import dock_compounds
+# → 3D visualization of binding poses with Blender + MolecularNodes
+```
+
+**Clinical Research** (Healthcare):
+```python
+# 1. ClinicalTrials.gov → 2. Statistical analysis → 3. Decision support
+from db_clinicaltrials import search_trials
+from analysis_statistical_analysis import survival_analysis
+from workflow_clinical_decision_support import generate_recommendations
+```
+
+## 3D Molecular Visualization
+
+Professional molecular visualization powered by **Blender 5.0** + **MolecularNodes 4.5.10**:
+
+- **Publication-quality rendering** using Cycles engine with path tracing
+- **Molecular dynamics animations** from MD simulation trajectories
+- **Multiple representation styles**: cartoon, surface, spheres, ball-and-stick
+- **CryoEM density maps** and **AlphaFold confidence visualization** (pLDDT)
+- **Headless automation** for high-throughput structure analysis
+- **Professional lighting** and **camera controls** for scientific imaging
 
 ## Workspace Convention
 
@@ -85,7 +155,7 @@ All code in this project runs in headless mode (`bpy.app.background == True`). F
 
 ## Skills
 
-This project has three skills in `.opencode/skills/`:
+This project has three core skills in `.opencode/skills/`:
 
 | Skill | Purpose |
 |-------|---------|
